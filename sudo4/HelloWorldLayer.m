@@ -9,6 +9,7 @@
 
 // Import the interfaces
 #import "HelloWorldLayer.h"
+#import "ChessBoardLayer.h"
 
 // Needed to obtain the Navigation Controller
 #import "AppDelegate.h"
@@ -68,13 +69,15 @@
 		// Achievement Menu Item using blocks
 		CCMenuItem *itemAchievement = [CCMenuItemFont itemWithString:@"Achievements" block:^(id sender) {
 			
+            [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[ChessBoardLayer scene] ]];
 			
-			GKAchievementViewController *achivementViewController = [[GKAchievementViewController alloc] init];
+			/*GKAchievementViewController *achivementViewController = [[GKAchievementViewController alloc] init];
 			achivementViewController.achievementDelegate = copy_self;
 			
 			AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
 			
 			[[app navController] presentModalViewController:achivementViewController animated:YES];
+             */
 			
 		}];
 		
