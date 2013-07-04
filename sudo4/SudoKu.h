@@ -22,5 +22,7 @@ public:
     int GetFullValue(int i, int j){return full_map[i][j];}
     
     void SetValue(int i, int j, int value){map[i][j] = value;}
+    
+    bool IsCorrectFilled();
 };
 #endif

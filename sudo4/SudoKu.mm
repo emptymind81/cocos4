@@ -18,6 +18,16 @@ CSudoku::CSudoku(int n)
       }
    }
    while(!resolve(ANY));
+    
+    for(int m=0; m<9; m++)
+    {
+        for(int n=0; n<9; n++)
+        {
+            full_map[m][n] = map[m][n];
+        }
+    }
+    
+    
    // 挖窟窿,因为有的窟窿没挖成功，因此设置最多尝试2n次，不管实际挖了几个窟窿，都结束
    int tried = 0;
    for(int k=0;k<n&&tried<2*n;)
@@ -60,13 +70,7 @@ CSudoku::CSudoku(int n)
       }
    }
     
-    for(int m=0; m<9; m++)
-    {
-        for(int n=0; n<9; n++)
-        {
-            full_map[m][n] = map[m][n];
-        }
-    }
+    
    //printf("(randomized sudoku created with %d blanks.)\n",blanks);
 }
 CSudoku::CSudoku(int *data)
@@ -214,6 +218,21 @@ void CSudoku::dfs()
    }
    map[im][jm]=0;
    //throw(1);
+}
+
+bool CSudoku::IsCorrectFilled()
+{
+    for(int i=0; i<9; i++)
+    {
+        for(int j=0; j<9; j++)
+        {
+            if(map[i][j] != full_map[i][j])
+            {
+                return false;
+            }
+        }
+    }
+    return true;
 }
 /*#include <iostream>
 #include "sudoku.h"

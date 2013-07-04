@@ -7,6 +7,7 @@
 //
 
 #import "ChessBoardLayer.h"
+#import "HelloWorldLayer.h"
 #import "SudoKu.h"
 
 @implementation ChessBoardLayer
@@ -32,6 +33,8 @@
     int m_current_number_bar_value;
     
     CCLabelTTF* label_map[9][9];
+    
+    NSString* m_result_str;
 };
 
 -(id) init
@@ -39,7 +42,7 @@
 	// always call "super" init
 	// Apple recommends to re-assign "self" with the "super's" return value
 	if( (self=[super init]) ) {
-        m_sudo = new CSudoku(20);
+        m_sudo = new CSudoku(3);
         //m_sudo->display();
         //m_sudo->resolve();
         
@@ -68,6 +71,8 @@
         m_number_bar_topleft = ccp(m_margin_width, s.height - m_menubar_height - 9 * m_cell_height - 3 * m_margin_height);
         m_current_number_bar_i = -1;
         m_current_number_bar_value = -1;
+        
+        m_result_str = @"Sudo working";
     }
     return self;
 }
@@ -102,6 +107,13 @@
         {
             m_sudo->SetValue(m_current_cell_j, m_current_cell_i, m_current_number_bar_value);
             m_current_cell_value = m_current_number_bar_value;
+            
+            if(m_sudo->IsCorrectFilled())
+            {
+                m_result_str = @"Sudo Succeed";
+                //sleep(3000);
+                [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[HelloWorldLayer scene] ]];
+            }
         }
     }
     else if(m_current_number_bar_i == 9)
@@ -126,6 +138,7 @@
     ccColor4F grid_back_color1 = ccc4f(0.5f, 0.5f, 1, 1 );
     ccColor4F grid_back_color2 = ccc4f(0.5f, 0.8f, 1, 1 );
     ccColor4F highlight_back_color = ccc4f(0.5f, 1, 0.3f, 1 );
+    ccDrawColor4F(1.0, 1.0, 1.0, 1);
     
     // fill full canvas
 	glLineWidth(1);
@@ -191,18 +204,22 @@
                 ccDrawCircle(cell_center, m_cell_width*0.4+2, 0, 10, NO);
             }
             
-            NSString* value_str = [NSString stringWithFormat:@"%i", value];
-            CCLabelTTF* old_label = label_map[j][i];
-            [self removeChild:old_label cleanup:true];
+            if(value != 0)
+            {
+                NSString* value_str = [NSString stringWithFormat:@"%i", value];
+                CCLabelTTF* old_label = label_map[j][i];
+                [self removeChild:old_label cleanup:true];
+                
+                CCLabelTTF* label = [CCLabelTTF labelWithString:value_str fontName:@"Arial" fontSize:32 ];
+                [self addChild: label z:1];
+                [label setPosition: cell_center];
+                label_map[j][i] = label;
+            }
             
-            CCLabelTTF* label = [CCLabelTTF labelWithString:value_str fontName:@"Arial" fontSize:32];
-            [self addChild: label z:1];
-            [label setPosition: cell_center];
-            label_map[j][i] = label;
         }
     }
     
-    CCLabelTTF* label = [CCLabelTTF labelWithString:@"Sudo" fontName:@"Arial" fontSize:32];
+    CCLabelTTF* label = [CCLabelTTF labelWithString:m_result_str fontName:@"Arial" fontSize:32];
     [self addChild: label z:1];
     [label setPosition: ccp(s.width/2, s.height-20)];
     
