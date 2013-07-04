@@ -141,7 +141,8 @@
 		B766B097178331D90039DB96 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B766B096178331D90039DB96 /* AppDelegate.m */; };
 		B766B09A178331D90039DB96 /* HelloWorldLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B766B099178331D90039DB96 /* HelloWorldLayer.m */; };
 		B766B09D178331D90039DB96 /* IntroLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B766B09C178331D90039DB96 /* IntroLayer.m */; };
-		B7B11E4B178467300009EDE5 /* ChessBoardLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B7B11E4A178467300009EDE5 /* ChessBoardLayer.m */; };
+		B7B2AF541785942300FAF489 /* SudoKu.mm in Sources */ = {isa = PBXBuildFile; fileRef = B7B2AF521785942300FAF489 /* SudoKu.mm */; };
+		B7B2AF561785953100FAF489 /* ChessBoardLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = B7B2AF551785953100FAF489 /* ChessBoardLayer.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -427,7 +428,9 @@
 		B766B09B178331D90039DB96 /* IntroLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntroLayer.h; sourceTree = "<group>"; };
 		B766B09C178331D90039DB96 /* IntroLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntroLayer.m; sourceTree = "<group>"; };
 		B7B11E491784672F0009EDE5 /* ChessBoardLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChessBoardLayer.h; sourceTree = "<group>"; };
-		B7B11E4A178467300009EDE5 /* ChessBoardLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChessBoardLayer.m; sourceTree = "<group>"; };
+		B7B2AF521785942300FAF489 /* SudoKu.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SudoKu.mm; sourceTree = "<group>"; };
+		B7B2AF531785942300FAF489 /* SudoKu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SudoKu.h; sourceTree = "<group>"; };
+		B7B2AF551785953100FAF489 /* ChessBoardLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ChessBoardLayer.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -488,10 +491,12 @@
 		B766AF04178331D40039DB96 /* sudo4 */ = {
 			isa = PBXGroup;
 			children = (
+				B7B2AF521785942300FAF489 /* SudoKu.mm */,
+				B7B2AF531785942300FAF489 /* SudoKu.h */,
 				B766B095178331D90039DB96 /* AppDelegate.h */,
 				B766B096178331D90039DB96 /* AppDelegate.m */,
 				B7B11E491784672F0009EDE5 /* ChessBoardLayer.h */,
-				B7B11E4A178467300009EDE5 /* ChessBoardLayer.m */,
+				B7B2AF551785953100FAF489 /* ChessBoardLayer.mm */,
 				B766B098178331D90039DB96 /* HelloWorldLayer.h */,
 				B766B099178331D90039DB96 /* HelloWorldLayer.m */,
 				B766B09B178331D90039DB96 /* IntroLayer.h */,
@@ -1069,7 +1074,8 @@
 				B766B097178331D90039DB96 /* AppDelegate.m in Sources */,
 				B766B09A178331D90039DB96 /* HelloWorldLayer.m in Sources */,
 				B766B09D178331D90039DB96 /* IntroLayer.m in Sources */,
-				B7B11E4B178467300009EDE5 /* ChessBoardLayer.m in Sources */,
+				B7B2AF541785942300FAF489 /* SudoKu.mm in Sources */,
+				B7B2AF561785953100FAF489 /* ChessBoardLayer.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
