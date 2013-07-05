@@ -143,6 +143,12 @@
 		B766B09D178331D90039DB96 /* IntroLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B766B09C178331D90039DB96 /* IntroLayer.m */; };
 		B7B2AF541785942300FAF489 /* SudoKu.mm in Sources */ = {isa = PBXBuildFile; fileRef = B7B2AF521785942300FAF489 /* SudoKu.mm */; };
 		B7B2AF561785953100FAF489 /* ChessBoardLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = B7B2AF551785953100FAF489 /* ChessBoardLayer.mm */; };
+		B7EA663D178719C600D23310 /* fps_images-hd.plist in Resources */ = {isa = PBXBuildFile; fileRef = B7EA6637178719C600D23310 /* fps_images-hd.plist */; };
+		B7EA663E178719C600D23310 /* fps_images-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = B7EA6638178719C600D23310 /* fps_images-hd.png */; };
+		B7EA663F178719C600D23310 /* fps_images-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = B7EA6639178719C600D23310 /* fps_images-ipadhd.png */; };
+		B7EA6640178719C600D23310 /* fps_images.GlyphProject in Resources */ = {isa = PBXBuildFile; fileRef = B7EA663A178719C600D23310 /* fps_images.GlyphProject */; };
+		B7EA6641178719C600D23310 /* fps_images.plist in Resources */ = {isa = PBXBuildFile; fileRef = B7EA663B178719C600D23310 /* fps_images.plist */; };
+		B7EA6642178719C600D23310 /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = B7EA663C178719C600D23310 /* fps_images.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -431,6 +437,12 @@
 		B7B2AF521785942300FAF489 /* SudoKu.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SudoKu.mm; sourceTree = "<group>"; };
 		B7B2AF531785942300FAF489 /* SudoKu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SudoKu.h; sourceTree = "<group>"; };
 		B7B2AF551785953100FAF489 /* ChessBoardLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ChessBoardLayer.mm; sourceTree = "<group>"; };
+		B7EA6637178719C600D23310 /* fps_images-hd.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "fps_images-hd.plist"; sourceTree = "<group>"; };
+		B7EA6638178719C600D23310 /* fps_images-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fps_images-hd.png"; sourceTree = "<group>"; };
+		B7EA6639178719C600D23310 /* fps_images-ipadhd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fps_images-ipadhd.png"; sourceTree = "<group>"; };
+		B7EA663A178719C600D23310 /* fps_images.GlyphProject */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = fps_images.GlyphProject; sourceTree = "<group>"; };
+		B7EA663B178719C600D23310 /* fps_images.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = fps_images.plist; sourceTree = "<group>"; };
+		B7EA663C178719C600D23310 /* fps_images.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fps_images.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -511,6 +523,12 @@
 		B766AF05178331D40039DB96 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B7EA6637178719C600D23310 /* fps_images-hd.plist */,
+				B7EA6638178719C600D23310 /* fps_images-hd.png */,
+				B7EA6639178719C600D23310 /* fps_images-ipadhd.png */,
+				B7EA663A178719C600D23310 /* fps_images.GlyphProject */,
+				B7EA663B178719C600D23310 /* fps_images.plist */,
+				B7EA663C178719C600D23310 /* fps_images.png */,
 				B766AF06178331D40039DB96 /* Default.png */,
 				B766AF08178331D40039DB96 /* Default@2x.png */,
 				B766AF0A178331D40039DB96 /* Default-568h@2x.png */,
@@ -952,6 +970,12 @@
 				B766AF19178331D40039DB96 /* Icon@2x.png in Resources */,
 				B766AF1C178331D40039DB96 /* iTunesArtwork in Resources */,
 				B766B075178331D90039DB96 /* ChangeLog in Resources */,
+				B7EA663D178719C600D23310 /* fps_images-hd.plist in Resources */,
+				B7EA663E178719C600D23310 /* fps_images-hd.png in Resources */,
+				B7EA663F178719C600D23310 /* fps_images-ipadhd.png in Resources */,
+				B7EA6640178719C600D23310 /* fps_images.GlyphProject in Resources */,
+				B7EA6641178719C600D23310 /* fps_images.plist in Resources */,
+				B7EA6642178719C600D23310 /* fps_images.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

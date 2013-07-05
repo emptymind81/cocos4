@@ -18,10 +18,34 @@ public:
    void display();
    int resolve(int mod=ALL);
     
-    int GetValue(int i, int j){return map[i][j];}
     int GetFullValue(int i, int j){return full_map[i][j];}
     
-    void SetValue(int i, int j, int value){map[i][j] = value;}
+    bool IsReadonlyCell(int i, int j)
+    {
+        if(map[i][j] == 0)
+        {
+            return false;
+        }
+        return true;
+    }
+    
+    int GetValue(int i, int j)
+    {
+        if(map[i][j] == 0)
+        {
+            return bak_map[i][j];
+        }
+        return map[i][j];
+    }
+    
+    
+    void SetValue(int i, int j, int value)
+    {
+        if(map[i][j] == 0)
+        {
+            bak_map[i][j] = value;
+        }        
+    }
     
     bool IsCorrectFilled();
 };

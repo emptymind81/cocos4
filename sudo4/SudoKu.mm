@@ -70,6 +70,14 @@ CSudoku::CSudoku(int n)
       }
    }
     
+    for(int m=0; m<9; m++)
+    {
+        for(int n=0; n<9; n++)
+        {
+            bak_map[m][n] = 0;
+        }
+    }
+    
     
    //printf("(randomized sudoku created with %d blanks.)\n",blanks);
 }
@@ -226,7 +234,12 @@ bool CSudoku::IsCorrectFilled()
     {
         for(int j=0; j<9; j++)
         {
-            if(map[i][j] != full_map[i][j])
+            int value = map[i][j];
+            if(value == 0)
+            {
+                value = bak_map[i][j];
+            }
+            if(value != full_map[i][j])
             {
                 return false;
             }
