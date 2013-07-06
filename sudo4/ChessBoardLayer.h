@@ -10,7 +10,14 @@
 #import "cocos2d.h"
 #import "CCLayer.h"
 
-@interface ChessBoardLayer : CCLayer
+typedef enum
+{
+	kTextTTF,
+	kTextBMFont,
+	kTextAtlas,
+} TextMethod;
+
+@interface ChessBoardLayer : CCLayer<UIAlertViewDelegate>
 
 // returns a CCScene that contains the HelloWorldLayer as the only child
 +(CCScene *) scene;

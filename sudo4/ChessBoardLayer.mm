@@ -32,12 +32,14 @@
     int m_current_number_bar_i;
     int m_current_number_bar_value;
     
-    CCSprite* label_map[9][9];
-    CCSprite* label_number_barmap[10];
+    NSObject* label_map[9][9];
+    NSObject* label_number_barmap[10];
     
     NSString* m_result_str;
     
     bool m_try_mode;
+    
+    TextMethod m_text_method;
 };
 
 -(id) init
@@ -88,11 +90,61 @@
             label_number_barmap[i] = NULL;
         }
         
-        m_result_str = @"Sudo working";
+        m_result_str = @"Sudo";
         
         m_try_mode = false;
+        
+        m_text_method = kTextAtlas;
     }
     return self;
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+
+    {
+        [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.0 scene:[HelloWorldLayer scene] ]];
+    }
+}
+
+- (void)clickBoardCellAtI:(int)i AtJ:(int)j
+{
+    //i is the col index
+    m_current_cell_i = i;
+    m_current_cell_j = j;
+    m_current_cell_value = abs(m_sudo->GetValue(m_current_cell_j, m_current_cell_i));
+}
+
+- (void)clickNumberBarCellAtI:(int)number_bar_i
+{
+    m_current_number_bar_i = number_bar_i;
+    m_current_number_bar_value = m_current_number_bar_i + 1;
+    if(m_try_mode)
+    {
+        m_current_number_bar_value = -m_current_number_bar_value;
+    }
+    
+    if(m_current_cell_i >= 0 && m_current_cell_i < 9 && !m_sudo->IsReadonlyCell(m_current_cell_j, m_current_cell_i))
+    {
+        m_sudo->SetValue(m_current_cell_j, m_current_cell_i, m_current_number_bar_value);
+        m_current_cell_value = abs(m_current_number_bar_value);
+        
+        if(m_sudo->IsCorrectFilled())
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                            message:@"You Win!"
+                                                           delegate:self
+                                                  cancelButtonTitle:nil
+                                                  otherButtonTitles:nil];
+            [alert addButtonWithTitle:@"OK"];
+            [alert show];
+        }
+    }
+}
+
+- (void)switchTryMode
+{
+    m_try_mode = !m_try_mode;
 }
 
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -101,17 +153,11 @@
     UITouch *touch = [touches anyObject];
     CGPoint location = [self convertTouchToNodeSpace:touch];
     
-    // Set up initial location of projectile
-    CGSize s = [[CCDirector sharedDirector] winSize];
-    
     int index_i = (location.x - m_topleft.x) / m_cell_width;
     int index_j = (-location.y + m_topleft.y) / m_cell_height;
     if(index_i >= 0 && index_i < 9 && index_j >= 0 && index_j < 9)
     {
-        //i is the col index
-        m_current_cell_i = index_i;
-        m_current_cell_j = index_j;
-        m_current_cell_value = abs(m_sudo->GetValue(m_current_cell_j, m_current_cell_i));
+        [self clickBoardCellAtI:index_i AtJ:index_j];
         return;
     }
     
@@ -119,35 +165,128 @@
     int number_bar_j = (location.y - m_number_bar_topleft.y) / m_cell_height;
     if(number_bar_i >= 0 && number_bar_i < 9 && number_bar_j >= 0 && number_bar_j < 1)
     {
-        m_current_number_bar_i = number_bar_i;
-        m_current_number_bar_value = m_current_number_bar_i + 1;
-        if(m_try_mode)
-        {
-            m_current_number_bar_value = -m_current_number_bar_value;
-        }
-        
-        if(m_current_cell_i >= 0 && m_current_cell_i < 9 && !m_sudo->IsReadonlyCell(m_current_cell_j, m_current_cell_i))
-        {
-            m_sudo->SetValue(m_current_cell_j, m_current_cell_i, m_current_number_bar_value);
-            m_current_cell_value = abs(m_current_number_bar_value);
-            
-            if(m_sudo->IsCorrectFilled())
-            {
-                m_result_str = @"Sudo Succeed";
-                //sleep(3000);
-                [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.0 scene:[HelloWorldLayer scene] ]];
-            }
-        }
+        [self clickNumberBarCellAtI:number_bar_i];
     }
     else if(number_bar_i == 9 && number_bar_j >= 0 && number_bar_j < 1)
     {
-        m_try_mode = !m_try_mode;
+        [self switchTryMode];
     }
-    else
+}
+
+-(NSObject*) drawText:(NSObject*)labelAddr withText:(NSString*)text withColor:(ccColor3B)color withPosition:(CGPoint)cell_center fontSize:(bool)isBig
+{
+    switch (m_text_method)
     {
-        m_current_number_bar_i = -1;
-        m_current_number_bar_value = -1;
+        case kTextBMFont:
+        {
+            double scale = 2.0;
+            if(!isBig)
+            {
+                scale = 1.4;
+            }
+            CCLabelBMFont* label = (CCLabelBMFont*)(labelAddr);
+            if(label)
+            {
+                [label setString:text];
+            }
+            else
+            {
+                label =[CCLabelBMFont labelWithString:text   fntFile:@"arial16.fnt"];
+                [label setAlignment:kCCTextAlignmentCenter];
+                [label setPosition: cell_center];
+                [self addChild: label z:1];
+            }
+            [label setColor:color];
+            [label setScale:scale];
+            return label;
+        }
+            break;
+        case kTextTTF:
+        {
+            int font_size = 32;
+            if(!isBig)
+            {
+                font_size = 22;
+            }
+           
+            CCLabelTTF* label = (CCLabelTTF*)(labelAddr);
+            if(label)
+            {
+                [label setFontSize:font_size];
+                [label setString:text];
+            }
+            else
+            {
+                label = [CCLabelTTF labelWithString:text fontName:@"Arial" fontSize:font_size ];
+                [label setPosition: cell_center];
+                [self addChild: label z:1];
+            }
+            [label setColor:color];
+            return label;
+        }
+            break;
+        case kTextAtlas:
+        {
+            int font_width=24;
+            int font_height = 64;
+            NSString* char_map_file = @"fps_images-hd.png";
+            if(!isBig)
+            {
+                font_width=12;
+                font_height = 32;
+                char_map_file = @"fps_images.png";
+            }
+            CGPoint text_center = ccp(cell_center.x - font_width*0.4, cell_center.y - font_height/4);
+            
+            static NSMapTable *dict = [[NSMapTable alloc] init];
+            CCLabelAtlas* label = (CCLabelAtlas*)(labelAddr);
+            if(label)
+            {
+                CCLabelAtlas* oppo_label = [dict objectForKey:label];//find in dict
+                
+                if(label.tag == isBig)//is exactly we want
+                {
+                    [label setString:text];
+                    [label setColor:color];
+                    [label setVisible:true];
+                    [oppo_label setVisible:false];
+                }
+                else
+                {
+                    [label setVisible:false];
+                    [oppo_label setVisible:true];
+                    
+                    if(oppo_label)
+                    {
+                        [oppo_label setString:text];
+                        [oppo_label setColor:color];
+                    }
+                    else
+                    {
+                        oppo_label = [CCLabelAtlas labelWithString:text charMapFile:char_map_file itemWidth:font_width itemHeight:font_height startCharMap:'.'];
+                        [oppo_label setPosition: text_center];
+                        [self addChild: oppo_label z:1];
+                        [dict setObject:(id)oppo_label forKey:label];
+                        oppo_label.tag = isBig;
+                    }                    
+                }
+            }
+            else
+            {
+                label = [CCLabelAtlas labelWithString:text charMapFile:char_map_file itemWidth:font_width itemHeight:font_height startCharMap:'.'];
+                [label setPosition: text_center];
+                [self addChild: label z:1];
+                label.tag = isBig;
+            }                
+            
+            return label;
+        }
+            break;
+            
+        default:
+            break;
     }
+    
 }
 
 -(void) draw
@@ -166,8 +305,7 @@
     // fill full canvas
 	glLineWidth(1);
 	CGPoint filledVertices1[] = { ccp(0,0), ccp(s.width,0), ccp(s.width,s.height), ccp(0,s.height), ccp(0,0) };
-	ccDrawSolidPoly(filledVertices1, 5, background_color);
-    
+	ccDrawSolidPoly(filledVertices1, 5, background_color);    
     
     // fill board color1
     CGPoint board_area[] = { m_topleft, ccp(m_topleft.x+m_cell_width*9,m_topleft.y),
@@ -220,7 +358,6 @@
             CGPoint cell_center = ccp(m_topleft.x+(i+0.5)*m_cell_width, m_topleft.y - (j+0.5)*m_cell_height);
             if((abs(value) == m_current_cell_value && value != 0) || (i == m_current_cell_i && j == m_current_cell_j))
             {
-                
                 ccDrawColor4F(highlight_back_color.r, highlight_back_color.g, highlight_back_color.b, highlight_back_color.a);
                 ccDrawSolidCircle(cell_center, m_cell_width*0.4, m_cell_width*0.4);
             }
@@ -234,44 +371,16 @@
             
             if(value != 0)
             {
-                NSString* value_str = [NSString stringWithFormat:@"%i", abs(value)];
-                
-                int font_size = 32;
-                int font_width=24;
-                int font_height = 64;
-                NSString* char_map_file = @"fps_images-hd.png";
-                if(value < 0)
-                {
-                    font_size = 22;
-                    font_width=12;
-                    font_height = 32;
-                    char_map_file = @"fps_images.png";
-                }
-                CGPoint text_center = ccp(cell_center.x - font_width/2, cell_center.y - font_height/3);
-                
+                NSString* text = [NSString stringWithFormat:@"%i", abs(value)];
                 ccColor3B color = ccc3(255, 255, 0);
                 if(m_sudo->IsReadonlyCell(j,i))
                 {
                     color = ccc3(255, 255, 255);
                 }
+                bool is_big = value>0 ? true:false;
                 
-                CCLabelTTF* label = (CCLabelTTF*)label_map[j][i];
-                if(label)
-                {
-                    [label setFontSize:font_size];
-                    [label setString:value_str];
-                }
-                else
-                {
-                    label = [CCLabelTTF labelWithString:value_str fontName:@"Arial" fontSize:font_size ];
-                    [label setPosition: cell_center];
-                    /*CCLabelAtlas* label = [CCLabelAtlas labelWithString:value_str charMapFile:@"fps_images-hd.png" itemWidth:font_width itemHeight:font_height startCharMap:'.'];
-                    [label setPosition: text_center];*/
-                    
-                    [self addChild: label z:1];                    
-                    label_map[j][i] = label;
-                }
-                [label setColor:color];
+                NSObject* label = [self drawText:label_map[i][j] withText:text withColor:color withPosition:cell_center fontSize:is_big];
+                label_map[i][j] = label;
             }
             
         }
@@ -293,44 +402,20 @@
             ccp(topleft.x+m_cell_width,topleft.y-m_cell_height), ccp(topleft.x,topleft.y-m_cell_height), topleft};
         ccDrawSolidPoly(cell_area, 5, highlight_back_color);
         
-        NSString* value_str;
+        NSString* text;
         if(i < 9)
         {
-            value_str = [NSString stringWithFormat:@"%i", value];
+            text = [NSString stringWithFormat:@"%i", value];
         }
         else
         {
-            value_str = @"E";
+            text = @"E";
         }
-        int font_size = 32;
-        int font_width=24;
-        int font_height = 64;
-        NSString* char_map_file = @"fps_images-hd.png";
-        if(m_try_mode)
-        {
-            font_size = 22;
-            font_width=12;
-            font_height = 32;
-            char_map_file = @"fps_images.png";
-        }
-        CGPoint text_center = ccp(cell_center.x - font_width/2, cell_center.y - font_height/3);
+        ccColor3B color = ccc3(255, 255, 255);
+        bool is_big = m_try_mode ? false:true;
         
-        CCLabelTTF* label = (CCLabelTTF*)label_number_barmap[i];
-        if(label)
-        {
-            [label setFontSize:font_size];
-        }
-        else
-        {
-            label = [CCLabelTTF labelWithString:value_str fontName:@"Arial" fontSize:font_size];
-            [label setPosition: cell_center];
-            
-            /*CCLabelAtlas* label = [CCLabelAtlas labelWithString:value_str charMapFile:char_map_file itemWidth:font_width itemHeight:font_height startCharMap:'.'];
-            [label setPosition: text_center];*/
-            
-            [self addChild: label z:1];            
-            label_number_barmap[i] = label;
-        }
+        NSObject* label = [self drawText:label_number_barmap[i] withText:text withColor:color withPosition:cell_center fontSize:is_big];
+        label_number_barmap[i] = label;
     }
     
 	CHECK_GL_ERROR_DEBUG();

@@ -149,6 +149,10 @@
 		B7EA6640178719C600D23310 /* fps_images.GlyphProject in Resources */ = {isa = PBXBuildFile; fileRef = B7EA663A178719C600D23310 /* fps_images.GlyphProject */; };
 		B7EA6641178719C600D23310 /* fps_images.plist in Resources */ = {isa = PBXBuildFile; fileRef = B7EA663B178719C600D23310 /* fps_images.plist */; };
 		B7EA6642178719C600D23310 /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = B7EA663C178719C600D23310 /* fps_images.png */; };
+		B7EA66451787223100D23310 /* boundsTestFont.fnt in Resources */ = {isa = PBXBuildFile; fileRef = B7EA66431787223100D23310 /* boundsTestFont.fnt */; };
+		B7EA66461787223100D23310 /* boundsTestFont.png in Resources */ = {isa = PBXBuildFile; fileRef = B7EA66441787223100D23310 /* boundsTestFont.png */; };
+		B7EA66491787271600D23310 /* arial16.fnt in Resources */ = {isa = PBXBuildFile; fileRef = B7EA66471787271500D23310 /* arial16.fnt */; };
+		B7EA664A1787271600D23310 /* arial16.png in Resources */ = {isa = PBXBuildFile; fileRef = B7EA66481787271600D23310 /* arial16.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -443,6 +447,10 @@
 		B7EA663A178719C600D23310 /* fps_images.GlyphProject */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = fps_images.GlyphProject; sourceTree = "<group>"; };
 		B7EA663B178719C600D23310 /* fps_images.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = fps_images.plist; sourceTree = "<group>"; };
 		B7EA663C178719C600D23310 /* fps_images.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fps_images.png; sourceTree = "<group>"; };
+		B7EA66431787223100D23310 /* boundsTestFont.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = boundsTestFont.fnt; sourceTree = "<group>"; };
+		B7EA66441787223100D23310 /* boundsTestFont.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = boundsTestFont.png; sourceTree = "<group>"; };
+		B7EA66471787271500D23310 /* arial16.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = arial16.fnt; sourceTree = "<group>"; };
+		B7EA66481787271600D23310 /* arial16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arial16.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -523,6 +531,10 @@
 		B766AF05178331D40039DB96 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B7EA66471787271500D23310 /* arial16.fnt */,
+				B7EA66481787271600D23310 /* arial16.png */,
+				B7EA66431787223100D23310 /* boundsTestFont.fnt */,
+				B7EA66441787223100D23310 /* boundsTestFont.png */,
 				B7EA6637178719C600D23310 /* fps_images-hd.plist */,
 				B7EA6638178719C600D23310 /* fps_images-hd.png */,
 				B7EA6639178719C600D23310 /* fps_images-ipadhd.png */,
@@ -976,6 +988,10 @@
 				B7EA6640178719C600D23310 /* fps_images.GlyphProject in Resources */,
 				B7EA6641178719C600D23310 /* fps_images.plist in Resources */,
 				B7EA6642178719C600D23310 /* fps_images.png in Resources */,
+				B7EA66451787223100D23310 /* boundsTestFont.fnt in Resources */,
+				B7EA66461787223100D23310 /* boundsTestFont.png in Resources */,
+				B7EA66491787271600D23310 /* arial16.fnt in Resources */,
+				B7EA664A1787271600D23310 /* arial16.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
