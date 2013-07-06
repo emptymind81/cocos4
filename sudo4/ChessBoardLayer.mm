@@ -101,10 +101,12 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
+    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.0 scene:[HelloWorldLayer scene] ]];
+}
 
-    {
-        [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.0 scene:[HelloWorldLayer scene] ]];
-    }
+- (void)clickHomeButton
+{
+    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.0 scene:[HelloWorldLayer scene] ]];
 }
 
 - (void)clickBoardCellAtI:(int)i AtJ:(int)j
@@ -155,10 +157,23 @@
     
     int index_i = (location.x - m_topleft.x) / m_cell_width;
     int index_j = (-location.y + m_topleft.y) / m_cell_height;
+    if(-location.y + m_topleft.y < 0)
+    {
+        index_j = -1;
+    }
+    if(location.x - m_topleft.x < 0)
+    {
+        index_i = -1;
+    }
     if(index_i >= 0 && index_i < 9 && index_j >= 0 && index_j < 9)
     {
         [self clickBoardCellAtI:index_i AtJ:index_j];
         return;
+    }
+    
+    if(index_i == 0 && index_j == -1)
+    {
+        [self clickHomeButton];
     }
     
     int number_bar_i = (location.x - m_number_bar_topleft.x) / m_cell_width;
@@ -389,6 +404,10 @@
     CCLabelTTF* main_label = [CCLabelTTF labelWithString:m_result_str fontName:@"Arial" fontSize:32];
     [self addChild: main_label z:1];
     [main_label setPosition: ccp(s.width/2, s.height-20)];
+    
+    CCLabelTTF* main_menu_label = [CCLabelTTF labelWithString:@"<" fontName:@"Arial" fontSize:32];
+    [self addChild: main_menu_label z:1];
+    [main_menu_label setPosition: ccp(m_topleft.x + m_cell_width/2, s.height-20)];
     
     
     //draw number bar
