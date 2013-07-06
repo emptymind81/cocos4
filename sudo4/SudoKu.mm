@@ -3,21 +3,62 @@
 #include "stdio.h"
 #include "stdlib.h"
 #include "time.h"
+
 CSudoku::CSudoku(int n)
 {
-   int i,j;
-   srand(time(0));
-   do
-   {
-      for(i=0;i<9;++i)
-      {
-         for(j=0;j<9;++j)
-            map[i][j]=0;
-         j=rand()%9;
-         map[i][j]=i+1;
-      }
-   }
-   while(!resolve(ANY));
+    genFull();
+    digHoles(n);
+}
+
+CSudoku::CSudoku(GameLevel level)
+{
+    int hole_num = 1;
+    switch (level)
+    {
+        case kSimple:
+            hole_num = 5;
+            break;
+        case kHard:
+            hole_num = 15;
+            break;
+        case kMaster:
+            hole_num = 35;
+            break;            
+        default:
+            break;
+    }
+    
+    genFull();
+    digHoles(hole_num);
+}
+
+CSudoku::CSudoku(int *data)
+{
+   int *pm=(int*)map;
+   for(int i=0;i<81;++i)
+      pm[i]=data[i];
+}
+
+CSudoku::~CSudoku()
+{
+   return;
+}
+
+void CSudoku::genFull()
+{
+    int i,j;
+    srand(time(0));
+    do
+    {
+        for(i=0;i<9;++i)
+        {
+            for(j=0;j<9;++j)
+                map[i][j]=0;
+            j=rand()%9;
+            map[i][j]=i+1;
+        }
+    }
+    while(!resolve(ANY));
     
     for(int m=0; m<9; m++)
     {
@@ -26,49 +67,51 @@ CSudoku::CSudoku(int n)
             full_map[m][n] = map[m][n];
         }
     }
-    
-    
-   // 挖窟窿,因为有的窟窿没挖成功，因此设置最多尝试2n次，不管实际挖了几个窟窿，都结束
-   int tried = 0;
-   for(int k=0;k<n&&tried<2*n;)
-   {
-      i=rand()%81;
-      j=i%9;
-      i=i/9;
-      if(map[i][j]>0)
-      {
-         int old = map[i][j];
-         map[i][j]=0;
+}
 
-         //bak the map because resolve will change it
-         for(int m=0; m<9; m++)
-         {
-            for(int n=0; n<9; n++)
+void CSudoku::digHoles(int n)
+{
+    int i,j;
+    int tried = 0;
+    for(int k=0;k<n&&tried<2*n;)
+    {
+        i=rand()%81;
+        j=i%9;
+        i=i/9;
+        if(map[i][j]>0)
+        {
+            int old = map[i][j];
+            map[i][j]=0;
+            
+            //bak the map because resolve will change it
+            for(int m=0; m<9; m++)
             {
-               bak_map[m][n] = map[m][n];
+                for(int n=0; n<9; n++)
+                {
+                    bak_map[m][n] = map[m][n];
+                }
             }
-         }
-         int is_unique = resolve(CHECKUNIQUE);
-         for(int m=0; m<9; m++)
-         {
-            for(int n=0; n<9; n++)
+            int is_unique = resolve(CHECKUNIQUE);
+            for(int m=0; m<9; m++)
             {
-               map[m][n] = bak_map[m][n];
+                for(int n=0; n<9; n++)
+                {
+                    map[m][n] = bak_map[m][n];
+                }
             }
-         }
-         //set back the map
-
-         if(is_unique == 0)//not unique, so need to set back
-         {
-            map[i][j] = old;
-            ++tried;
-         }
-         else
-         {
-            ++k;
-         }
-      }
-   }
+            //set back the map
+            
+            if(is_unique == 0)//not unique, so need to set back
+            {
+                map[i][j] = old;
+                ++tried;
+            }
+            else
+            {
+                ++k;
+            }
+        }
+    }
     
     for(int m=0; m<9; m++)
     {
@@ -77,20 +120,8 @@ CSudoku::CSudoku(int n)
             bak_map[m][n] = 0;
         }
     }
-    
-    
-   //printf("(randomized sudoku created with %d blanks.)\n",blanks);
 }
-CSudoku::CSudoku(int *data)
-{
-   int *pm=(int*)map;
-   for(int i=0;i<81;++i)
-      pm[i]=data[i];
-}
-CSudoku::~CSudoku()
-{
-   return;
-}
+
 void CSudoku::display()
 {
    for(int i=0;i<9;++i)
@@ -105,6 +136,7 @@ void CSudoku::display()
       printf("\n");
    }
 }
+
 int CSudoku::resolve(int mod)
 {
    smod=mod;
@@ -117,7 +149,6 @@ int CSudoku::resolve(int mod)
       }
       catch(int)
       {
-         int mm=0;
       }
       return solves;
    }
@@ -148,6 +179,7 @@ int CSudoku::resolve(int mod)
    }
    return 0;
 }
+
 int CSudoku::check(int y,int x,int *mark)
 {
    int i,j,is,js,count=0;
@@ -169,6 +201,7 @@ int CSudoku::check(int y,int x,int *mark)
          count++;
    return count;
 }
+
 void CSudoku::dfs()
 {
    int i,j,im=-1,jm,min=10;
@@ -247,6 +280,7 @@ bool CSudoku::IsCorrectFilled()
     }
     return true;
 }
+
 /*#include <iostream>
 #include "sudoku.h"
 using namespace std;

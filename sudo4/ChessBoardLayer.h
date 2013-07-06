@@ -9,6 +9,8 @@
 // When you import this file, you import all the cocos2d classes
 #import "cocos2d.h"
 #import "CCLayer.h"
+//#import "SudoKu.h"
+#import "Define.h"
 
 typedef enum
 {
@@ -19,7 +21,11 @@ typedef enum
 
 @interface ChessBoardLayer : CCLayer<UIAlertViewDelegate>
 
+-(id) initWithLevel:(GameLevel)gameLevel;
+
 // returns a CCScene that contains the HelloWorldLayer as the only child
-+(CCScene *) scene;
++(CCScene *) scene:(GameLevel)game_level;
+
+
 
 @end

@@ -143,6 +143,16 @@
 		B766B09D178331D90039DB96 /* IntroLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B766B09C178331D90039DB96 /* IntroLayer.m */; };
 		B7B2AF541785942300FAF489 /* SudoKu.mm in Sources */ = {isa = PBXBuildFile; fileRef = B7B2AF521785942300FAF489 /* SudoKu.mm */; };
 		B7B2AF561785953100FAF489 /* ChessBoardLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = B7B2AF551785953100FAF489 /* ChessBoardLayer.mm */; };
+		B7E4681617886A6D001EACE2 /* Calendar1-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = B7E4680C17886A6D001EACE2 /* Calendar1-hd.png */; };
+		B7E4681717886A6D001EACE2 /* Calendar1.png in Resources */ = {isa = PBXBuildFile; fileRef = B7E4680D17886A6D001EACE2 /* Calendar1.png */; };
+		B7E4681817886A6D001EACE2 /* Calendar2-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = B7E4680E17886A6D001EACE2 /* Calendar2-hd.png */; };
+		B7E4681917886A6D001EACE2 /* Calendar2.png in Resources */ = {isa = PBXBuildFile; fileRef = B7E4680F17886A6D001EACE2 /* Calendar2.png */; };
+		B7E4681A17886A6D001EACE2 /* Calendar3-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = B7E4681017886A6D001EACE2 /* Calendar3-hd.png */; };
+		B7E4681B17886A6D001EACE2 /* Calendar3.png in Resources */ = {isa = PBXBuildFile; fileRef = B7E4681117886A6D001EACE2 /* Calendar3.png */; };
+		B7E4681C17886A6D001EACE2 /* Calendar4-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = B7E4681217886A6D001EACE2 /* Calendar4-hd.png */; };
+		B7E4681D17886A6D001EACE2 /* Calendar4.png in Resources */ = {isa = PBXBuildFile; fileRef = B7E4681317886A6D001EACE2 /* Calendar4.png */; };
+		B7E4681E17886A6D001EACE2 /* Calendar5-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = B7E4681417886A6D001EACE2 /* Calendar5-hd.png */; };
+		B7E4681F17886A6D001EACE2 /* Calendar5.png in Resources */ = {isa = PBXBuildFile; fileRef = B7E4681517886A6D001EACE2 /* Calendar5.png */; };
 		B7EA663D178719C600D23310 /* fps_images-hd.plist in Resources */ = {isa = PBXBuildFile; fileRef = B7EA6637178719C600D23310 /* fps_images-hd.plist */; };
 		B7EA663E178719C600D23310 /* fps_images-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = B7EA6638178719C600D23310 /* fps_images-hd.png */; };
 		B7EA663F178719C600D23310 /* fps_images-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = B7EA6639178719C600D23310 /* fps_images-ipadhd.png */; };
@@ -441,6 +451,17 @@
 		B7B2AF521785942300FAF489 /* SudoKu.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SudoKu.mm; sourceTree = "<group>"; };
 		B7B2AF531785942300FAF489 /* SudoKu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SudoKu.h; sourceTree = "<group>"; };
 		B7B2AF551785953100FAF489 /* ChessBoardLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ChessBoardLayer.mm; sourceTree = "<group>"; };
+		B7DFDFE917881C6800C27E0D /* Define.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Define.h; sourceTree = "<group>"; };
+		B7E4680C17886A6D001EACE2 /* Calendar1-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Calendar1-hd.png"; sourceTree = "<group>"; };
+		B7E4680D17886A6D001EACE2 /* Calendar1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Calendar1.png; sourceTree = "<group>"; };
+		B7E4680E17886A6D001EACE2 /* Calendar2-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Calendar2-hd.png"; sourceTree = "<group>"; };
+		B7E4680F17886A6D001EACE2 /* Calendar2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Calendar2.png; sourceTree = "<group>"; };
+		B7E4681017886A6D001EACE2 /* Calendar3-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Calendar3-hd.png"; sourceTree = "<group>"; };
+		B7E4681117886A6D001EACE2 /* Calendar3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Calendar3.png; sourceTree = "<group>"; };
+		B7E4681217886A6D001EACE2 /* Calendar4-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Calendar4-hd.png"; sourceTree = "<group>"; };
+		B7E4681317886A6D001EACE2 /* Calendar4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Calendar4.png; sourceTree = "<group>"; };
+		B7E4681417886A6D001EACE2 /* Calendar5-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Calendar5-hd.png"; sourceTree = "<group>"; };
+		B7E4681517886A6D001EACE2 /* Calendar5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Calendar5.png; sourceTree = "<group>"; };
 		B7EA6637178719C600D23310 /* fps_images-hd.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "fps_images-hd.plist"; sourceTree = "<group>"; };
 		B7EA6638178719C600D23310 /* fps_images-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fps_images-hd.png"; sourceTree = "<group>"; };
 		B7EA6639178719C600D23310 /* fps_images-ipadhd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fps_images-ipadhd.png"; sourceTree = "<group>"; };
@@ -513,6 +534,7 @@
 			children = (
 				B7B2AF521785942300FAF489 /* SudoKu.mm */,
 				B7B2AF531785942300FAF489 /* SudoKu.h */,
+				B7DFDFE917881C6800C27E0D /* Define.h */,
 				B766B095178331D90039DB96 /* AppDelegate.h */,
 				B766B096178331D90039DB96 /* AppDelegate.m */,
 				B7B11E491784672F0009EDE5 /* ChessBoardLayer.h */,
@@ -531,6 +553,16 @@
 		B766AF05178331D40039DB96 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B7E4680C17886A6D001EACE2 /* Calendar1-hd.png */,
+				B7E4680D17886A6D001EACE2 /* Calendar1.png */,
+				B7E4680E17886A6D001EACE2 /* Calendar2-hd.png */,
+				B7E4680F17886A6D001EACE2 /* Calendar2.png */,
+				B7E4681017886A6D001EACE2 /* Calendar3-hd.png */,
+				B7E4681117886A6D001EACE2 /* Calendar3.png */,
+				B7E4681217886A6D001EACE2 /* Calendar4-hd.png */,
+				B7E4681317886A6D001EACE2 /* Calendar4.png */,
+				B7E4681417886A6D001EACE2 /* Calendar5-hd.png */,
+				B7E4681517886A6D001EACE2 /* Calendar5.png */,
 				B7EA66471787271500D23310 /* arial16.fnt */,
 				B7EA66481787271600D23310 /* arial16.png */,
 				B7EA66431787223100D23310 /* boundsTestFont.fnt */,
@@ -992,6 +1024,16 @@
 				B7EA66461787223100D23310 /* boundsTestFont.png in Resources */,
 				B7EA66491787271600D23310 /* arial16.fnt in Resources */,
 				B7EA664A1787271600D23310 /* arial16.png in Resources */,
+				B7E4681617886A6D001EACE2 /* Calendar1-hd.png in Resources */,
+				B7E4681717886A6D001EACE2 /* Calendar1.png in Resources */,
+				B7E4681817886A6D001EACE2 /* Calendar2-hd.png in Resources */,
+				B7E4681917886A6D001EACE2 /* Calendar2.png in Resources */,
+				B7E4681A17886A6D001EACE2 /* Calendar3-hd.png in Resources */,
+				B7E4681B17886A6D001EACE2 /* Calendar3.png in Resources */,
+				B7E4681C17886A6D001EACE2 /* Calendar4-hd.png in Resources */,
+				B7E4681D17886A6D001EACE2 /* Calendar4.png in Resources */,
+				B7E4681E17886A6D001EACE2 /* Calendar5-hd.png in Resources */,
+				B7E4681F17886A6D001EACE2 /* Calendar5.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

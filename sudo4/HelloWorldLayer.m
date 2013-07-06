@@ -35,6 +35,11 @@
 	return scene;
 }
 
+-(void) enterGameScene:(GameLevel)gameLevel
+{
+    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[ChessBoardLayer scene:gameLevel] ]];
+}
+
 // on "init" you need to initialize your instance
 -(id) init
 {
@@ -42,66 +47,60 @@
 	// Apple recommends to re-assign "self" with the "super's" return value
 	if( (self=[super init]) ) {
 		
-		// create and initialize a Label
-		CCLabelTTF *label = [CCLabelTTF labelWithString:@"Hello World" fontName:@"Marker Felt" fontSize:64];
-
-		// ask director for the window size
 		CGSize size = [[CCDirector sharedDirector] winSize];
-	
-		// position the label on the center of the screen
-		label.position =  ccp( size.width /2 , size.height/2 );
-		
-		// add the label as a child to this Layer
+        
+        CCSprite *bg = [CCSprite spriteWithFile:@"Calendar1-hd.png"];
+        bg.position = ccp(size.width /2 , size.height/2);
+        [self addChild:bg];
+        
+		CCLabelTTF *label = [CCLabelTTF labelWithString:@"Welcome to Sudo" fontName:@"Marker Felt" fontSize:64];		
+		label.position =  ccp( size.width /2 , size.height/2 + 100 );
 		[self addChild: label];
-		
-		
-		
-		//
-		// Leaderboards and Achievements
-		//
-		
-		// Default font size will be 28 points.
-		[CCMenuItemFont setFontSize:28];
-		
-		// to avoid a retain-cycle with the menuitem and blocks
-		__block id copy_self = self;
-		
-		// Achievement Menu Item using blocks
-		CCMenuItem *itemAchievement = [CCMenuItemFont itemWithString:@"Achievements" block:^(id sender) {
-			
-            [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[ChessBoardLayer scene] ]];
-			
-			/*GKAchievementViewController *achivementViewController = [[GKAchievementViewController alloc] init];
-			achivementViewController.achievementDelegate = copy_self;
-			
-			AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
-			
-			[[app navController] presentModalViewController:achivementViewController animated:YES];
-             */
-			
-		}];
-		
-		// Leaderboard Menu Item using blocks
-		CCMenuItem *itemLeaderboard = [CCMenuItemFont itemWithString:@"Leaderboard" block:^(id sender) {
-			
-			
-			GKLeaderboardViewController *leaderboardViewController = [[GKLeaderboardViewController alloc] init];
-			leaderboardViewController.leaderboardDelegate = copy_self;
-			
-			AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
-			
-			[[app navController] presentModalViewController:leaderboardViewController animated:YES];
-			
-		}];
+        
 
+		[CCMenuItemFont setFontSize:28];		
+		CCMenuItem *item_simple = [CCMenuItemFont itemWithString:@"Simple" block:^(id sender) {
+			
+            [self enterGameScene:kSimple];
+		}];
+        [item_simple setColor:ccRED];
+		CCMenuItem *item_hard = [CCMenuItemFont itemWithString:@"Hard" block:^(id sender) {
+			
+            [self enterGameScene:kHard];
+		}];
+        [item_hard setColor:ccGREEN];
+        CCMenuItem *item_Master = [CCMenuItemFont itemWithString:@"Master" block:^(id sender) {
+			
+            [self enterGameScene:kMaster];
+		}];
+        [item_Master setColor:ccBLUE];
+        /*CCMenuItem *item_Quit = [CCMenuItemFont itemWithString:@"Quit" block:^(id sender) {
+			
+            CC_DIRECTOR_END();
+		}];*/
 		
-		CCMenu *menu = [CCMenu menuWithItems:itemAchievement, itemLeaderboard, nil];
-		
-		[menu alignItemsHorizontallyWithPadding:20];
-		[menu setPosition:ccp( size.width/2, size.height/2 - 50)];
-		
-		// Add the menu to the layer
+		CCMenu *menu = [CCMenu menuWithItems:item_simple, item_hard, item_Master, /*item_Quit,*/ nil];
+        [menu alignItemsVertically];
+        
+        // elastic effect
+		CGSize s = [[CCDirector sharedDirector] winSize];
+		int i=0;
+		for( CCNode *child in [menu children] ) {
+			CGPoint dstPoint = child.position;
+			int offset = s.width/2 + 50;
+			if( i % 2 == 0)
+				offset = -offset;
+			child.position = ccp( dstPoint.x + offset, dstPoint.y);
+			[child runAction:
+			 [CCEaseElasticOut actionWithAction:
+			  [CCMoveBy actionWithDuration:2 position:ccp(dstPoint.x - offset,0)]
+										 period: 0.35f]
+             ];
+			i++;
+		}
+
 		[self addChild:menu];
+        [menu setPosition:ccp( size.width/2, size.height/2 - 50)];
 
 	}
 	return self;

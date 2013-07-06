@@ -40,14 +40,14 @@
     bool m_try_mode;
     
     TextMethod m_text_method;
+    
+    CCSprite* m_bg_sprite;
 };
 
--(id) init
+-(id) initWithLevel:(GameLevel)gameLevel
 {
-	// always call "super" init
-	// Apple recommends to re-assign "self" with the "super's" return value
 	if( (self=[super init]) ) {
-        m_sudo = new CSudoku(3);
+        m_sudo = new CSudoku(gameLevel);
         //m_sudo->display();
         //m_sudo->resolve();
         
@@ -95,6 +95,9 @@
         m_try_mode = false;
         
         m_text_method = kTextAtlas;
+        
+        m_bg_sprite = [CCSprite spriteWithFile:@"Calendar1-hd.png"];
+        m_bg_sprite.position = ccp(s.width/2 , s.height/2);
     }
     return self;
 }
@@ -304,11 +307,18 @@
     
 }
 
+-(void) visit
+{
+    //m_bg_sprite is not added to this layer, because as children it'll be drawed after [self draw]
+    [m_bg_sprite visit];
+    [super visit];    
+}
+
 -(void) draw
 {
 	CGSize s = [[CCDirector sharedDirector] winSize];
     
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
     //background color
     ccColor4F background_color = ccc4f(1.0f, 0.5f, 1, 1 );
@@ -319,8 +329,13 @@
     
     // fill full canvas
 	glLineWidth(1);
-	CGPoint filledVertices1[] = { ccp(0,0), ccp(s.width,0), ccp(s.width,s.height), ccp(0,s.height), ccp(0,0) };
-	ccDrawSolidPoly(filledVertices1, 5, background_color);    
+	/*CGPoint filledVertices1[] = { ccp(0,0), ccp(s.width,0), ccp(s.width,s.height), ccp(0,s.height), ccp(0,0) };
+	ccDrawSolidPoly(filledVertices1, 5, background_color);*/
+    /*m_bg_sprite = [CCSprite spriteWithFile:@"Calendar1-hd.png"];
+    m_bg_sprite.position = ccp(s.width/2 , s.height/2);
+    [self addChild:m_bg_sprite];*/
+    //m_bg_sprite.offsetPosition = ccp(s.width/2 , s.height/2);
+    //[m_bg_sprite draw];
     
     // fill board color1
     CGPoint board_area[] = { m_topleft, ccp(m_topleft.x+m_cell_width*9,m_topleft.y),
@@ -442,13 +457,13 @@
 
 
 // Helper class method that creates a Scene with the HelloWorldLayer as the only child.
-+(CCScene *) scene
++(CCScene *) scene:(GameLevel)game_level
 {
 	// 'scene' is an autorelease object.
 	CCScene *scene = [CCScene node];
 	
 	// 'layer' is an autorelease object.
-	ChessBoardLayer *layer = [ChessBoardLayer node];
+	ChessBoardLayer *layer = [[ChessBoardLayer alloc] initWithLevel:game_level];//[ChessBoardLayer node];
 	
 	// add layer as a child to scene
 	[scene addChild: layer];

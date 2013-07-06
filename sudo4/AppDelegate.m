@@ -11,6 +11,7 @@
 #import "AppDelegate.h"
 #import "IntroLayer.h"
 #import "HelloWorldLayer.h"
+#import "ChessBoardLayer.h"
 
 @implementation MyNavigationController
 
