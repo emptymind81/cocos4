@@ -141,6 +141,8 @@
 		B766B097178331D90039DB96 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B766B096178331D90039DB96 /* AppDelegate.m */; };
 		B766B09A178331D90039DB96 /* HelloWorldLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B766B099178331D90039DB96 /* HelloWorldLayer.m */; };
 		B766B09D178331D90039DB96 /* IntroLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B766B09C178331D90039DB96 /* IntroLayer.m */; };
+		B7AFFD091789113F00C39BFD /* background-music-aac.caf in Resources */ = {isa = PBXBuildFile; fileRef = B7AFFD071789113F00C39BFD /* background-music-aac.caf */; };
+		B7AFFD0A1789113F00C39BFD /* pew-pew-lei.caf in Resources */ = {isa = PBXBuildFile; fileRef = B7AFFD081789113F00C39BFD /* pew-pew-lei.caf */; };
 		B7B2AF541785942300FAF489 /* SudoKu.mm in Sources */ = {isa = PBXBuildFile; fileRef = B7B2AF521785942300FAF489 /* SudoKu.mm */; };
 		B7B2AF561785953100FAF489 /* ChessBoardLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = B7B2AF551785953100FAF489 /* ChessBoardLayer.mm */; };
 		B7E4681617886A6D001EACE2 /* Calendar1-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = B7E4680C17886A6D001EACE2 /* Calendar1-hd.png */; };
@@ -447,6 +449,8 @@
 		B766B099178331D90039DB96 /* HelloWorldLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HelloWorldLayer.m; sourceTree = "<group>"; };
 		B766B09B178331D90039DB96 /* IntroLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntroLayer.h; sourceTree = "<group>"; };
 		B766B09C178331D90039DB96 /* IntroLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntroLayer.m; sourceTree = "<group>"; };
+		B7AFFD071789113F00C39BFD /* background-music-aac.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "background-music-aac.caf"; sourceTree = "<group>"; };
+		B7AFFD081789113F00C39BFD /* pew-pew-lei.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pew-pew-lei.caf"; sourceTree = "<group>"; };
 		B7B11E491784672F0009EDE5 /* ChessBoardLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChessBoardLayer.h; sourceTree = "<group>"; };
 		B7B2AF521785942300FAF489 /* SudoKu.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SudoKu.mm; sourceTree = "<group>"; };
 		B7B2AF531785942300FAF489 /* SudoKu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SudoKu.h; sourceTree = "<group>"; };
@@ -553,26 +557,9 @@
 		B766AF05178331D40039DB96 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				B7E4680C17886A6D001EACE2 /* Calendar1-hd.png */,
-				B7E4680D17886A6D001EACE2 /* Calendar1.png */,
-				B7E4680E17886A6D001EACE2 /* Calendar2-hd.png */,
-				B7E4680F17886A6D001EACE2 /* Calendar2.png */,
-				B7E4681017886A6D001EACE2 /* Calendar3-hd.png */,
-				B7E4681117886A6D001EACE2 /* Calendar3.png */,
-				B7E4681217886A6D001EACE2 /* Calendar4-hd.png */,
-				B7E4681317886A6D001EACE2 /* Calendar4.png */,
-				B7E4681417886A6D001EACE2 /* Calendar5-hd.png */,
-				B7E4681517886A6D001EACE2 /* Calendar5.png */,
-				B7EA66471787271500D23310 /* arial16.fnt */,
-				B7EA66481787271600D23310 /* arial16.png */,
-				B7EA66431787223100D23310 /* boundsTestFont.fnt */,
-				B7EA66441787223100D23310 /* boundsTestFont.png */,
-				B7EA6637178719C600D23310 /* fps_images-hd.plist */,
-				B7EA6638178719C600D23310 /* fps_images-hd.png */,
-				B7EA6639178719C600D23310 /* fps_images-ipadhd.png */,
-				B7EA663A178719C600D23310 /* fps_images.GlyphProject */,
-				B7EA663B178719C600D23310 /* fps_images.plist */,
-				B7EA663C178719C600D23310 /* fps_images.png */,
+				B7AFFD061789112800C39BFD /* Background */,
+				B7AFFD051789111C00C39BFD /* Fonts */,
+				B7AFFD041789111300C39BFD /* Sounds */,
 				B766AF06178331D40039DB96 /* Default.png */,
 				B766AF08178331D40039DB96 /* Default@2x.png */,
 				B766AF0A178331D40039DB96 /* Default-568h@2x.png */,
@@ -951,6 +938,65 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		B7AFFD041789111300C39BFD /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				B7AFFD071789113F00C39BFD /* background-music-aac.caf */,
+				B7AFFD081789113F00C39BFD /* pew-pew-lei.caf */,
+			);
+			name = Sounds;
+			sourceTree = "<group>";
+		};
+		B7AFFD051789111C00C39BFD /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				B7AFFD0C1789119F00C39BFD /* Atlas */,
+				B7AFFD0B1789119000C39BFD /* BMFont */,
+			);
+			name = Fonts;
+			sourceTree = "<group>";
+		};
+		B7AFFD061789112800C39BFD /* Background */ = {
+			isa = PBXGroup;
+			children = (
+				B7E4680C17886A6D001EACE2 /* Calendar1-hd.png */,
+				B7E4680D17886A6D001EACE2 /* Calendar1.png */,
+				B7E4680E17886A6D001EACE2 /* Calendar2-hd.png */,
+				B7E4680F17886A6D001EACE2 /* Calendar2.png */,
+				B7E4681017886A6D001EACE2 /* Calendar3-hd.png */,
+				B7E4681117886A6D001EACE2 /* Calendar3.png */,
+				B7E4681217886A6D001EACE2 /* Calendar4-hd.png */,
+				B7E4681317886A6D001EACE2 /* Calendar4.png */,
+				B7E4681417886A6D001EACE2 /* Calendar5-hd.png */,
+				B7E4681517886A6D001EACE2 /* Calendar5.png */,
+			);
+			name = Background;
+			sourceTree = "<group>";
+		};
+		B7AFFD0B1789119000C39BFD /* BMFont */ = {
+			isa = PBXGroup;
+			children = (
+				B7EA66471787271500D23310 /* arial16.fnt */,
+				B7EA66481787271600D23310 /* arial16.png */,
+				B7EA66431787223100D23310 /* boundsTestFont.fnt */,
+				B7EA66441787223100D23310 /* boundsTestFont.png */,
+			);
+			name = BMFont;
+			sourceTree = "<group>";
+		};
+		B7AFFD0C1789119F00C39BFD /* Atlas */ = {
+			isa = PBXGroup;
+			children = (
+				B7EA6637178719C600D23310 /* fps_images-hd.plist */,
+				B7EA6638178719C600D23310 /* fps_images-hd.png */,
+				B7EA6639178719C600D23310 /* fps_images-ipadhd.png */,
+				B7EA663A178719C600D23310 /* fps_images.GlyphProject */,
+				B7EA663B178719C600D23310 /* fps_images.plist */,
+				B7EA663C178719C600D23310 /* fps_images.png */,
+			);
+			name = Atlas;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1034,6 +1080,8 @@
 				B7E4681D17886A6D001EACE2 /* Calendar4.png in Resources */,
 				B7E4681E17886A6D001EACE2 /* Calendar5-hd.png in Resources */,
 				B7E4681F17886A6D001EACE2 /* Calendar5.png in Resources */,
+				B7AFFD091789113F00C39BFD /* background-music-aac.caf in Resources */,
+				B7AFFD0A1789113F00C39BFD /* pew-pew-lei.caf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,6 +8,7 @@
 
 #import "ChessBoardLayer.h"
 #import "HelloWorldLayer.h"
+#import "SimpleAudioEngine.h"
 #import "SudoKu.h"
 
 @implementation ChessBoardLayer
@@ -94,10 +95,12 @@
         
         m_try_mode = false;
         
-        m_text_method = kTextAtlas;
+        m_text_method = kTextBMFont;
         
         m_bg_sprite = [CCSprite spriteWithFile:@"Calendar1-hd.png"];
         m_bg_sprite.position = ccp(s.width/2 , s.height/2);
+        
+        [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"background-music-aac.caf"];
     }
     return self;
 }
@@ -109,6 +112,7 @@
 
 - (void)clickHomeButton
 {
+    [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
     [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.0 scene:[HelloWorldLayer scene] ]];
 }
 
@@ -158,6 +162,7 @@
     UITouch *touch = [touches anyObject];
     CGPoint location = [self convertTouchToNodeSpace:touch];
     
+    bool play_effect = false;
     int index_i = (location.x - m_topleft.x) / m_cell_width;
     int index_j = (-location.y + m_topleft.y) / m_cell_height;
     if(-location.y + m_topleft.y < 0)
@@ -171,23 +176,39 @@
     if(index_i >= 0 && index_i < 9 && index_j >= 0 && index_j < 9)
     {
         [self clickBoardCellAtI:index_i AtJ:index_j];
-        return;
+        play_effect = true;
     }
-    
-    if(index_i == 0 && index_j == -1)
+    else if(index_i == 0 && index_j == -1)
     {
         [self clickHomeButton];
+        play_effect = true;
     }
-    
-    int number_bar_i = (location.x - m_number_bar_topleft.x) / m_cell_width;
-    int number_bar_j = (location.y - m_number_bar_topleft.y) / m_cell_height;
-    if(number_bar_i >= 0 && number_bar_i < 9 && number_bar_j >= 0 && number_bar_j < 1)
+    else//click on number bar
     {
-        [self clickNumberBarCellAtI:number_bar_i];
+        int number_bar_i = (location.x - m_number_bar_topleft.x) / m_cell_width;
+        int number_bar_j = (-location.y + m_number_bar_topleft.y) / m_cell_height;
+        if(-location.y + m_number_bar_topleft.y < 0)
+        {
+            number_bar_j = -1;
+        }
+        if(location.x - m_number_bar_topleft.x < 0)
+        {
+            number_bar_i = -1;
+        }
+        if(number_bar_i >= 0 && number_bar_i < 9 && number_bar_j >= 0 && number_bar_j < 1)
+        {
+            [self clickNumberBarCellAtI:number_bar_i];
+            play_effect = true;
+        }
+        else if(number_bar_i == 9 && number_bar_j >= 0 && number_bar_j < 1)
+        {
+            [self switchTryMode];
+            play_effect = true;
+        }
     }
-    else if(number_bar_i == 9 && number_bar_j >= 0 && number_bar_j < 1)
+    if(play_effect)
     {
-        [self switchTryMode];
+        [[SimpleAudioEngine sharedEngine] playEffect:@"pew-pew-lei.caf"];
     }
 }
 
