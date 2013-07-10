@@ -143,6 +143,7 @@
 		B766B09D178331D90039DB96 /* IntroLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B766B09C178331D90039DB96 /* IntroLayer.m */; };
 		B7AFFD091789113F00C39BFD /* background-music-aac.caf in Resources */ = {isa = PBXBuildFile; fileRef = B7AFFD071789113F00C39BFD /* background-music-aac.caf */; };
 		B7AFFD0A1789113F00C39BFD /* pew-pew-lei.caf in Resources */ = {isa = PBXBuildFile; fileRef = B7AFFD081789113F00C39BFD /* pew-pew-lei.caf */; };
+		B7AFFD0E17891B9800C39BFD /* Cosmos01.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B7AFFD0D17891B9800C39BFD /* Cosmos01.jpg */; };
 		B7B2AF541785942300FAF489 /* SudoKu.mm in Sources */ = {isa = PBXBuildFile; fileRef = B7B2AF521785942300FAF489 /* SudoKu.mm */; };
 		B7B2AF561785953100FAF489 /* ChessBoardLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = B7B2AF551785953100FAF489 /* ChessBoardLayer.mm */; };
 		B7E4681617886A6D001EACE2 /* Calendar1-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = B7E4680C17886A6D001EACE2 /* Calendar1-hd.png */; };
@@ -451,6 +452,7 @@
 		B766B09C178331D90039DB96 /* IntroLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntroLayer.m; sourceTree = "<group>"; };
 		B7AFFD071789113F00C39BFD /* background-music-aac.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "background-music-aac.caf"; sourceTree = "<group>"; };
 		B7AFFD081789113F00C39BFD /* pew-pew-lei.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pew-pew-lei.caf"; sourceTree = "<group>"; };
+		B7AFFD0D17891B9800C39BFD /* Cosmos01.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Cosmos01.jpg; sourceTree = "<group>"; };
 		B7B11E491784672F0009EDE5 /* ChessBoardLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChessBoardLayer.h; sourceTree = "<group>"; };
 		B7B2AF521785942300FAF489 /* SudoKu.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SudoKu.mm; sourceTree = "<group>"; };
 		B7B2AF531785942300FAF489 /* SudoKu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SudoKu.h; sourceTree = "<group>"; };
@@ -959,6 +961,7 @@
 		B7AFFD061789112800C39BFD /* Background */ = {
 			isa = PBXGroup;
 			children = (
+				B7AFFD0D17891B9800C39BFD /* Cosmos01.jpg */,
 				B7E4680C17886A6D001EACE2 /* Calendar1-hd.png */,
 				B7E4680D17886A6D001EACE2 /* Calendar1.png */,
 				B7E4680E17886A6D001EACE2 /* Calendar2-hd.png */,
@@ -1082,6 +1085,7 @@
 				B7E4681F17886A6D001EACE2 /* Calendar5.png in Resources */,
 				B7AFFD091789113F00C39BFD /* background-music-aac.caf in Resources */,
 				B7AFFD0A1789113F00C39BFD /* pew-pew-lei.caf in Resources */,
+				B7AFFD0E17891B9800C39BFD /* Cosmos01.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

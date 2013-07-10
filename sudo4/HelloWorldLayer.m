@@ -49,7 +49,7 @@
 		
 		CGSize size = [[CCDirector sharedDirector] winSize];
         
-        CCSprite *bg = [CCSprite spriteWithFile:@"Calendar1-hd.png"];
+        CCSprite *bg = [CCSprite spriteWithFile:@"Cosmos01.jpg"];
         bg.position = ccp(size.width /2 , size.height/2);
         [self addChild:bg];
         

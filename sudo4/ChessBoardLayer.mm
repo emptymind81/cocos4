@@ -97,7 +97,7 @@
         
         m_text_method = kTextBMFont;
         
-        m_bg_sprite = [CCSprite spriteWithFile:@"Calendar1-hd.png"];
+        m_bg_sprite = [CCSprite spriteWithFile:@"Cosmos01.jpg"];
         m_bg_sprite.position = ccp(s.width/2 , s.height/2);
         
         [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"background-music-aac.caf"];
@@ -140,6 +140,8 @@
         
         if(m_sudo->IsCorrectFilled())
         {
+            [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
+            
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
                                                             message:@"You Win!"
                                                            delegate:self
