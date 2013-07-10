@@ -20,6 +20,17 @@ typedef enum
 } TextMethod;
 
 @interface ChessBoardLayer : CCLayer<UIAlertViewDelegate>
+{
+    UITapGestureRecognizer * _tapRecognizer;
+    UITapGestureRecognizer * _doubleTapRecognizer;
+    UISwipeGestureRecognizer * _swipeLeftRecognizer;
+    UISwipeGestureRecognizer * _swipeRightRecognizer;
+}
+
+@property (retain) UITapGestureRecognizer * tapRecognizer;
+@property (retain) UITapGestureRecognizer * doubleTapRecognizer;
+@property (retain) UISwipeGestureRecognizer * swipeLeftRecognizer;
+@property (retain) UISwipeGestureRecognizer * swipeRightRecognizer;
 
 -(id) initWithLevel:(GameLevel)gameLevel;
 

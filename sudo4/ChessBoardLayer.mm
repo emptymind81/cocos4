@@ -45,6 +45,11 @@
     CCSprite* m_bg_sprite;
 };
 
+@synthesize tapRecognizer = _tapRecognizer;
+@synthesize doubleTapRecognizer = _doubleTapRecognizer;
+@synthesize swipeLeftRecognizer = _swipeLeftRecognizer;
+@synthesize swipeRightRecognizer = _swipeRightRecognizer;
+
 -(id) initWithLevel:(GameLevel)gameLevel
 {
 	if( (self=[super init]) ) {
@@ -110,10 +115,11 @@
     [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.0 scene:[HelloWorldLayer scene] ]];
 }
 
-- (void)clickHomeButton
+- (void)backToHome
 {
     [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
     [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.0 scene:[HelloWorldLayer scene] ]];
+    [self playSoundEffect];
 }
 
 - (void)clickBoardCellAtI:(int)i AtJ:(int)j
@@ -122,10 +128,13 @@
     m_current_cell_i = i;
     m_current_cell_j = j;
     m_current_cell_value = abs(m_sudo->GetValue(m_current_cell_j, m_current_cell_i));
+    [self playSoundEffect];
 }
 
 - (void)clickNumberBarCellAtI:(int)number_bar_i
 {
+    [self playSoundEffect];
+    
     m_current_number_bar_i = number_bar_i;
     m_current_number_bar_value = m_current_number_bar_i + 1;
     if(m_try_mode)
@@ -150,21 +159,17 @@
             [alert addButtonWithTitle:@"OK"];
             [alert show];
         }
-    }
+    }    
 }
 
 - (void)switchTryMode
 {
     m_try_mode = !m_try_mode;
+    [self playSoundEffect];
 }
 
-- (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    
-    // Choose one of the touches to work with
-    UITouch *touch = [touches anyObject];
-    CGPoint location = [self convertTouchToNodeSpace:touch];
-    
-    bool play_effect = false;
+- (void)handleTapAtLocation:(CGPoint)location{
+ 
     int index_i = (location.x - m_topleft.x) / m_cell_width;
     int index_j = (-location.y + m_topleft.y) / m_cell_height;
     if(-location.y + m_topleft.y < 0)
@@ -178,12 +183,10 @@
     if(index_i >= 0 && index_i < 9 && index_j >= 0 && index_j < 9)
     {
         [self clickBoardCellAtI:index_i AtJ:index_j];
-        play_effect = true;
     }
     else if(index_i == 0 && index_j == -1)
     {
-        [self clickHomeButton];
-        play_effect = true;
+        [self backToHome];
     }
     else//click on number bar
     {
@@ -200,18 +203,25 @@
         if(number_bar_i >= 0 && number_bar_i < 9 && number_bar_j >= 0 && number_bar_j < 1)
         {
             [self clickNumberBarCellAtI:number_bar_i];
-            play_effect = true;
         }
         else if(number_bar_i == 9 && number_bar_j >= 0 && number_bar_j < 1)
         {
             [self switchTryMode];
-            play_effect = true;
         }
     }
-    if(play_effect)
-    {
-        [[SimpleAudioEngine sharedEngine] playEffect:@"pew-pew-lei.caf"];
-    }
+}
+
+- (void)playSoundEffect
+{
+    [[SimpleAudioEngine sharedEngine] playEffect:@"pew-pew-lei.caf"];
+}
+
+//when using recognizer, this will not be called
+- (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    UITouch *touch = [touches anyObject];
+    CGPoint location = [self convertTouchToNodeSpace:touch];
+    
+    [self handleTapAtLocation:location];
 }
 
 -(NSObject*) drawText:(NSObject*)labelAddr withText:(NSString*)text withColor:(ccColor3B)color withPosition:(CGPoint)cell_center fontSize:(bool)isBig
@@ -344,7 +354,6 @@
     //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
     //background color
-    ccColor4F background_color = ccc4f(1.0f, 0.5f, 1, 1 );
     ccColor4F grid_back_color1 = ccc4f(0.5f, 0.5f, 1, 1 );
     ccColor4F grid_back_color2 = ccc4f(0.5f, 0.8f, 1, 1 );
     ccColor4F highlight_back_color = ccc4f(0.5f, 1, 0.3f, 1 );
@@ -352,7 +361,9 @@
     
     // fill full canvas
 	glLineWidth(1);
-	/*CGPoint filledVertices1[] = { ccp(0,0), ccp(s.width,0), ccp(s.width,s.height), ccp(0,s.height), ccp(0,0) };
+	/*
+    ccColor4F background_color = ccc4f(1.0f, 0.5f, 1, 1 );
+    CGPoint filledVertices1[] = { ccp(0,0), ccp(s.width,0), ccp(s.width,s.height), ccp(0,s.height), ccp(0,0) };
 	ccDrawSolidPoly(filledVertices1, 5, background_color);*/
     /*m_bg_sprite = [CCSprite spriteWithFile:@"Calendar1-hd.png"];
     m_bg_sprite.position = ccp(s.width/2 , s.height/2);
@@ -494,5 +505,56 @@
 	// return the scene
 	return scene;
 }
+
+/*
+ - (CGPoint)convertViewPointToNodeSpace:(CGPoint)point
+ {
+ point = [[CCDirector sharedDirector] convertToGL: point];
+ return [self convertToNodeSpace:point];
+ }
+ 
+ - (void)handleTap:(UITapGestureRecognizer *)tapRecognizer {
+ //CCLOG(@"Tap!");
+ CGPoint pt = [tapRecognizer locationInView:[[CCDirector sharedDirector] view]];
+ CGPoint location = [self convertViewPointToNodeSpace:pt];
+ [self handleTapAtLocation:location];
+ }
+ 
+ - (void)handleDoubleTap:(UITapGestureRecognizer *)doubletapRecognizer {
+ [self switchTryMode];
+ }
+ 
+ - (void)handleLeftSwipe:(UISwipeGestureRecognizer *)swipeRecognizer {
+ [self backToHome];
+ }
+ 
+ - (void)handleRightSwipe:(UISwipeGestureRecognizer *)swipeRecognizer {
+ [self backToHome];
+ }
+ 
+ - (void)onEnter {
+ self.doubleTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
+ _doubleTapRecognizer.numberOfTapsRequired = 2;
+ [[[CCDirector sharedDirector] view] addGestureRecognizer:_doubleTapRecognizer];
+ 
+ self.tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+ [_tapRecognizer requireGestureRecognizerToFail:_doubleTapRecognizer];
+ [[[CCDirector sharedDirector] view] addGestureRecognizer:_tapRecognizer];
+ 
+ self.swipeLeftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleLeftSwipe:)];
+ _swipeLeftRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
+ [[[CCDirector sharedDirector] view] addGestureRecognizer:_swipeLeftRecognizer];
+ 
+ self.swipeRightRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleRightSwipe:)];
+ _swipeRightRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
+ [[[CCDirector sharedDirector] view] addGestureRecognizer:_swipeRightRecognizer];
+ }
+ 
+ - (void)onExit {
+ [[[CCDirector sharedDirector] view] removeGestureRecognizer:_tapRecognizer];
+ [[[CCDirector sharedDirector] view] removeGestureRecognizer:_doubleTapRecognizer];
+ [[[CCDirector sharedDirector] view] removeGestureRecognizer:_swipeLeftRecognizer];
+ [[[CCDirector sharedDirector] view] removeGestureRecognizer:_swipeRightRecognizer];
+ }*/
 
 @end
