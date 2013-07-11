@@ -10,6 +10,7 @@
 #import "IntroLayer.h"
 #import "HelloWorldLayer.h"
 #import "ChessBoardLayer.h"
+#import "AppDelegate.h"
 
 @interface GameViewController ()
 
@@ -91,7 +92,7 @@
     // Dispose of any resources that can be recreated.
 }
 
--(id) setupGame
+-(id) setupGame:(CGRect)bounds
 {
     // CCGLView creation
 	// viewWithFrame: size of the OpenGL view. For full screen use [_window bounds]
@@ -106,7 +107,7 @@
 	//  - Possible values: YES, NO
 	// numberOfSamples: Only valid if multisampling is enabled
 	//  - Possible values: 0 to glGetIntegerv(GL_MAX_SAMPLES_APPLE)
-	CCGLView *glView = [CCGLView viewWithFrame:[self.view bounds]
+	CCGLView *glView = [CCGLView viewWithFrame:bounds/*[self.view bounds]*/
 								   pixelFormat:kEAGLColorFormatRGB565
 								   depthFormat:0
 							preserveBackbuffer:NO
@@ -125,7 +126,9 @@
 	[director_ setAnimationInterval:1.0/60];
 	
 	// attach the openglView to the director
-	[director_ setView:glView];
+	//[director_ setView:glView];    
+    [self.view insertSubview:glView atIndex:0];
+    [director_ setView:glView];
 	
 	// 2D projection
 	[director_ setProjection:kCCDirectorProjection2D];
@@ -154,13 +157,13 @@
 	[CCTexture2D PVRImagesHavePremultipliedAlpha:YES];
 	
 	// Create a Navigation Controller with the Director
-	/*navController_ = [[MyNavigationController alloc] initWithRootViewController:director_];
+	/*UINavigationController *navController_ = [[UINavigationController alloc] initWithRootViewController:director_];
 	navController_.navigationBarHidden = YES;*/
     
 	// for rotation and other messages
 	[director_ setDelegate:self];
     
-    return director_;
+    return self;
 }
 
 @end

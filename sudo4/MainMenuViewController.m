@@ -65,7 +65,7 @@
         GameViewController* game_view_controller = [[GameViewController alloc] initWithNibName:nil bundle:nil];
         //[GameViewController alloc] initWithRootViewController:director_];
         //game_view_controller.navigationBarHidden = YES;
-        UIViewController* director = [game_view_controller setupGame];
+        [game_view_controller setupGame:[self.view bounds]];
         self.rootViewController  = game_view_controller;
     }
     [self.navigationController pushViewController:_rootViewController animated:YES];
@@ -73,7 +73,7 @@
 
 - (IBAction)aboutTapped:(id)sender {
     if (_aboutViewController == nil) {
-        self.aboutViewController = [[TestViewController alloc] initWithNibName:nil bundle:nil];
+        self.aboutViewController = [[AboutViewController alloc] initWithNibName:nil bundle:nil];
     }
     [self.navigationController pushViewController:_aboutViewController animated:NO];
 }

@@ -16,6 +16,6 @@
 
 @property (unsafe_unretained, readonly) CCDirectorIOS *director;
 
--(id) setupGame;
+-(id) setupGame:(CGRect)bounds;
 
 @end

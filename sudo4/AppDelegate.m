@@ -84,14 +84,11 @@
 	// Create the main window
 	window_ = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 	
-	
-	
-    
     UIViewController* main_menu_view_controller = [[MainMenuViewController alloc] init];
 	
 	// set the Navigation Controller as the root view controller
 	[window_ setRootViewController:main_menu_view_controller];
-    //[window_ addSubview:main_menu_view_controller.view];
+    window_.rootViewController = [[UINavigationController alloc] initWithRootViewController:main_menu_view_controller];
 	
 	// make main window visible
 	[window_ makeKeyAndVisible];
